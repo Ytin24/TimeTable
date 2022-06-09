@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UserControl\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Style\ButtonSimple.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Resource>
