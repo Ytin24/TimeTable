@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kwork__2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" MinHeight="524" MinWidth="1024">
     <Grid>
-
+        <Label x:Name="ChangeLanguage" Content="EN/RU" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10"/>
+        <Label x:Name="DBConnection" Content="Настройки подключения" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10"/>
+        <TextBlock Text="Авторизация" FontSize="45" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,100,0,0"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+            <Button x:Name="TeacherLogin" Content="Учитель" Height="100" Width="300"/>
+            <Separator Opacity="0" Width="15" Height="15"/>
+            <Button x:Name="DirectorLogin" Content="Директор" Height="100" Width="300"/>
+        </StackPanel>
     </Grid>
 </Window>
