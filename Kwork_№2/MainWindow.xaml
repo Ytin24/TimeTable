@@ -3,22 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Kwork__2" 
-        xmlns:ucs="clr-namespace:Kwork__2.UserControls"
+        xmlns:local="clr-namespace:Kwork__2"
         mc:Ignorable="d"
         Title="MainWindow" MinHeight="524" MinWidth="1024">
     <Grid>
         <Label x:Name="ChangeLanguage" Content="EN/RU" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10"/>
-        <Label x:Name="DBConnection" Content="Настройки подключения" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10"/>
+        <Label x:Name="DBConnection" Content="Настройки подключения" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" MouseLeftButtonDown="DBConnection_MouseLeftButtonDown"/>
         <TextBlock Text="Авторизация" FontSize="45" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,100,0,0"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
             <Button Style="{DynamicResource ButtonStyle1}" x:Name="TeacherLogin" Content="Учитель" Height="100" Width="300"/>
             <Separator Opacity="0" Width="15" Height="15"/>
             <Button x:Name="DirectorLogin" Content="Директор" Height="100" Width="300" Style="{DynamicResource ButtonStyle1}"/>
         </StackPanel>
+<!--#region popupdb-->
+            <Grid x:Name="PopUpDb" Background="#7f000000" Visibility="Hidden" >
+                <Grid Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Margin="20">
+                        <TextBlock  Text="Данные для DB" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" />
+                    
 
-        <ucs:PopUpDb x:Name="popupdb" Text="Данные для подключения">
-            <StackPanel>
+        <StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
                 <StackPanel Orientation="Vertical" >
                     <TextBlock Text="Host:" FontSize="20"/>
@@ -32,24 +36,28 @@
                     <TextBlock Text="Password:" FontSize="20"/>
                 </StackPanel>
                 <Separator Opacity="0" Width="20"/>
-                    <StackPanel Orientation="Vertical">
-                        <TextBox Width="200" Height="30" VerticalContentAlignment="Center"/>
-                        <Separator Opacity="0" Height="10"/>
-                        <TextBox Width="200" Height="30" VerticalContentAlignment="Center"/>
-                        <Separator Opacity="0" Height="10"/>
-                        <TextBox Width="200" Height="30" VerticalContentAlignment="Center"/>
-                        <Separator Opacity="0" Height="10"/>
-                        <TextBox Width="200" Height="30" VerticalContentAlignment="Center"/>
-                        <Separator Opacity="0" Height="10"/>
-                        <TextBox Width="200" Height="30" VerticalContentAlignment="Center"/>
-                        <Separator Opacity="0" Height="10"/>
-                    </StackPanel>
-
+                <StackPanel Orientation="Vertical">
+                    <TextBox x:Name="Host" Width="200" Height="30" VerticalContentAlignment="Center"/>
+                    <Separator Opacity="0" Height="10"/>
+                    <TextBox x:Name="Port" Width="200" Height="30" VerticalContentAlignment="Center"/>
+                    <Separator Opacity="0" Height="10"/>
+                    <TextBox x:Name="Name" Width="200" Height="30" VerticalContentAlignment="Center"/>
+                    <Separator Opacity="0" Height="10"/>
+                    <TextBox x:Name="Login" Width="200" Height="30" VerticalContentAlignment="Center"/>
+                    <Separator Opacity="0" Height="10"/>
+                    <TextBox x:Name="Password"  Width="200" Height="30" VerticalContentAlignment="Center"/>
+                    <Separator Opacity="0" Height="10"/>
                 </StackPanel>
-                <Button Content="Готово" Style="{DynamicResource ButtonStyle1}" Height="30"/>
+
             </StackPanel>
-        </ucs:PopUpDb>
-
-
+            <Button Content="Готово" Style="{DynamicResource ButtonStyle1}" Click="Button_Click" Height="30"/>
+        </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
+<!--#endregion-->
+        <!--#region DirectorAuth-->
+        
+        <!--#endregion-->
     </Grid>
 </Window>

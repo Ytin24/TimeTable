@@ -20,9 +20,29 @@ namespace Kwork__2
     /// </summary>
     public partial class MainWindow : Window
     {
+        DbConnect dbConnect;
         public MainWindow()
         {
             InitializeComponent();
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            dbConnect = new DbConnect()
+            {
+                HostDb = Host.Text,
+                PortDb = Port.Text,
+                NameDb = Name.Text,
+                LoginDb = Login.Text,
+                PasswordDb = Password.Text
+            };
+            PopUpDb.Visibility = Visibility.Hidden;
+        }
+
+        private void DBConnection_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            PopUpDb.Visibility = Visibility.Visible;
         }
     }
 }
