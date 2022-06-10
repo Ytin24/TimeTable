@@ -13,7 +13,7 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
             <Button Style="{DynamicResource ButtonStyle1}" x:Name="TeacherLogin" Content="Учитель" Height="100" Width="300"/>
             <Separator Opacity="0" Width="15" Height="15"/>
-            <Button x:Name="DirectorLogin" Content="Директор" Height="100" Width="300" Style="{DynamicResource ButtonStyle1}"/>
+            <Button x:Name="DirectorLogin" Content="Директор" Height="100" Width="300" Style="{DynamicResource ButtonStyle1}" Click="DirectorLogin_Click"/>
         </StackPanel>
 <!--#region popupdb-->
             <Grid x:Name="PopUpDb" Background="#7f000000" Visibility="Hidden" >
@@ -56,8 +56,18 @@
             </Grid>
         </Grid>
 <!--#endregion-->
-        <!--#region DirectorAuth-->
-        
+<!--#region DirectorAuth-->
+        <Grid x:Name="PopUpD" Background="#7f000000" Visibility="Hidden">
+            <Grid Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Margin="20">
+                    <TextBlock  Text="Введите пароль" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" />
+                    <TextBox x:Name="dpassword" Height="25" Margin="0,10,0,10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <Button Content="Готово" Style="{DynamicResource ButtonStyle1}" Click="Button_Click" Height="30"/>
+                </StackPanel>
+                
+            </Grid>
+            
+        </Grid>
         <!--#endregion-->
     </Grid>
 </Window>

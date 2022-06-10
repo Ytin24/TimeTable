@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Kwork__2
 {
@@ -38,11 +40,18 @@ namespace Kwork__2
                 PasswordDb = Password.Text
             };
             PopUpDb.Visibility = Visibility.Hidden;
+            var connectionString = $"Data Source={dbConnect.HostDb}, {dbConnect.PortDb};Initial Catalog={dbConnect.NameDb};User ID={dbConnect.LoginDb};Password={dbConnect.PasswordDb} ";
+            var connection = new SqlConnection(connectionString);
         }
 
         private void DBConnection_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             PopUpDb.Visibility = Visibility.Visible;
+        }
+
+        private void DirectorLogin_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
