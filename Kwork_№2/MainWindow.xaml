@@ -4,95 +4,108 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kwork__2"
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" MinHeight="524" MinWidth="1024">
+        Title="MainWindow" MinHeight="524" Height="524" MinWidth="1024" Width="1024">
     <Grid>
         <Grid>
-        <Label x:Name="ChangeLanguage" Content="EN/RU" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10"/>
-        <Label x:Name="DBConnection" Content="Настройки подключения" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" MouseLeftButtonDown="DBConnection_MouseLeftButtonDown"/>
-        <TextBlock Text="Авторизация" FontSize="45" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,100,0,0"/>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-            <Button Style="{DynamicResource ButtonStyle1}" x:Name="TeacherLogin" Content="Учитель" Height="100" Width="300" Click="TeacherLogin_Click"/>
-            <Separator Opacity="0" Width="15" Height="15"/>
-            <Button x:Name="DirectorLogin" Content="Директор" Height="100" Width="300" Style="{DynamicResource ButtonStyle1}" Click="DirectorLogin_Click"/>
-        </StackPanel>
-        <!--#region popupdb-->
-        <Grid x:Name="PopUpDb" Background="#7f000000" Visibility="Collapsed" >
-            <Grid Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <StackPanel Margin="20">
-                    <TextBlock  Text="Данные для DB" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" />
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
-                            <StackPanel Orientation="Vertical" >
-                                <TextBlock Text="Host:" FontSize="20"/>
-                                <Separator Opacity="0" Height="12"/>
-                                <TextBlock Text="Port:" FontSize="20"/>
-                                <Separator Opacity="0" Height="14"/>
-                                <TextBlock Text="Name Db:" FontSize="20"/>
-                                <Separator Opacity="0" Height="14"/>
-                                <TextBlock Text="Login:" FontSize="20"/>
-                                <Separator Opacity="0" Height="13"/>
-                                <TextBlock Text="Password:" FontSize="20"/>
+            <Label x:Name="ChangeLanguage" Content="EN/RU" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10"/>
+            <Label x:Name="DBConnection" Content="Настройки подключения" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" MouseLeftButtonDown="DBConnection_MouseLeftButtonDown"/>
+            <TextBlock Text="Авторизация" FontSize="45" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,100,0,0"/>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                <Button Style="{DynamicResource ButtonStyle1}" x:Name="TeacherLogin" Content="Учитель" Height="100" Width="300" Click="TeacherLogin_Click"/>
+                <Separator Opacity="0" Width="15" Height="15"/>
+                <Button x:Name="DirectorLogin" Content="Директор" Height="100" Width="300" Style="{DynamicResource ButtonStyle1}" Click="DirectorLogin_Click"/>
+            </StackPanel>
+            <!--#region popupdb-->
+            <Grid x:Name="PopUpDb" Background="#7f000000" Visibility="Collapsed" >
+                <Grid Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Margin="20">
+                        <TextBlock  Text="Данные для DB" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" />
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                                <StackPanel Orientation="Vertical" >
+                                    <TextBlock Text="Host:" FontSize="20"/>
+                                    <Separator Opacity="0" Height="12"/>
+                                    <TextBlock Text="Port:" FontSize="20"/>
+                                    <Separator Opacity="0" Height="14"/>
+                                    <TextBlock Text="Name Db:" FontSize="20"/>
+                                    <Separator Opacity="0" Height="14"/>
+                                    <TextBlock Text="Login:" FontSize="20"/>
+                                    <Separator Opacity="0" Height="13"/>
+                                    <TextBlock Text="Password:" FontSize="20"/>
+                                </StackPanel>
+                                <Separator Opacity="0" Width="20"/>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBox x:Name="Host" Width="200" Height="30" VerticalContentAlignment="Center"/>
+                                    <Separator Opacity="0" Height="10"/>
+                                    <TextBox x:Name="Port" Width="200" Height="30" VerticalContentAlignment="Center"/>
+                                    <Separator Opacity="0" Height="10"/>
+                                    <TextBox x:Name="Name" Width="200" Height="30" VerticalContentAlignment="Center"/>
+                                    <Separator Opacity="0" Height="10"/>
+                                    <TextBox x:Name="Login" Width="200" Height="30" VerticalContentAlignment="Center"/>
+                                    <Separator Opacity="0" Height="10"/>
+                                    <TextBox x:Name="Password"  Width="200" Height="30" VerticalContentAlignment="Center"/>
+                                    <Separator Opacity="0" Height="10"/>
+                                </StackPanel>
                             </StackPanel>
-                            <Separator Opacity="0" Width="20"/>
-                            <StackPanel Orientation="Vertical">
-                                <TextBox x:Name="Host" Width="200" Height="30" VerticalContentAlignment="Center"/>
-                                <Separator Opacity="0" Height="10"/>
-                                <TextBox x:Name="Port" Width="200" Height="30" VerticalContentAlignment="Center"/>
-                                <Separator Opacity="0" Height="10"/>
-                                <TextBox x:Name="Name" Width="200" Height="30" VerticalContentAlignment="Center"/>
-                                <Separator Opacity="0" Height="10"/>
-                                <TextBox x:Name="Login" Width="200" Height="30" VerticalContentAlignment="Center"/>
-                                <Separator Opacity="0" Height="10"/>
-                                <TextBox x:Name="Password"  Width="200" Height="30" VerticalContentAlignment="Center"/>
-                                <Separator Opacity="0" Height="10"/>
-                            </StackPanel>
+                            <Button Content="Готово" Style="{DynamicResource ButtonStyle1}" Click="Button_Click" Height="30"/>
                         </StackPanel>
-                        <Button Content="Готово" Style="{DynamicResource ButtonStyle1}" Click="Button_Click" Height="30"/>
                     </StackPanel>
-                </StackPanel>
+                </Grid>
             </Grid>
-        </Grid>
-        <!--#endregion-->
-        <!--#region DirectorAuth-->
-        <Grid x:Name="PopUpD" Background="#7f000000" Visibility="Collapsed">
-            <Grid Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <StackPanel Margin="20">
-                    <TextBlock  Text="Введите пароль" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" />
-                    <TextBox x:Name="dpassword" Height="25" Margin="0,10,0,10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-                    <Button Content="Готово" Style="{DynamicResource ButtonStyle1}" Height="30" Click="Button_Click_1"/>
-                </StackPanel>
+            <!--#endregion-->
+            <!--#region DirectorAuth-->
+            <Grid x:Name="PopUpD" Background="#7f000000" Visibility="Collapsed">
+                <Grid Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Margin="20">
+                        <TextBlock  Text="Введите пароль" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" />
+                        <TextBox x:Name="dpassword" Height="25" Margin="0,10,0,10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                        <Button Content="Готово" Style="{DynamicResource ButtonStyle1}" Height="30" Click="Button_Click_1"/>
+                    </StackPanel>
+                </Grid>
             </Grid>
+            <!--#endregion-->
         </Grid>
-        <!--#endregion-->
-        </Grid>
-    <!--#region Teacher-->
-        <Grid x:Name="Teacher" Background="White" >
-            <TextBlock Text="Главное меню" HorizontalAlignment="Center" Margin="0,20,0,0" FontSize="55"/>
+        <!--#region Teacher-->
+        <Grid x:Name="Teacher" Background="White" Visibility="Collapsed">
+            <TextBlock Text="Главное меню" HorizontalAlignment="Center" Margin="0,20,0,0" FontSize="45"/>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button x:Name="TZamena" Content="Замены" Height="100" Width="400" Click="TZamena_Click" FontSize="35"/>
                 <Separator Opacity="0" Height="10"/>
                 <Button x:Name="TRaspisanie" Content="Расписание" Height="100" Width="400" Click="TRaspisanie_Click" FontSize="35" />
+                <Separator Opacity="0" Height="10"/>
+                <Button x:Name="TTeachers" Content="Расписание" Height="100" Width="400" Click="TRaspisanie_Click" FontSize="35" />
             </StackPanel>
-            <Grid x:Name="TDataZamena" Background="White" >
-                <DataGrid x:Name="TEST" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="700" Margin="40">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Убрали"/>
-                        <DataGridTextColumn Header="Поставили"/>
-                        <DataGridTextColumn Header="Класс"/>
-                        <DataGridTextColumn Header="Урок"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+            <Grid x:Name="TDataZamena" Background="White" Visibility="Collapsed">
+                <DataGrid x:Name="ZamenaGrid" IsReadOnly="True" AutoGenerateColumns="True" CanUserAddRows="False" CanUserDeleteRows="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="100"/>
             </Grid>
-            <Grid x:Name="TDataRaspisanie">
-                
+            <Grid x:Name="TDataRaspisanie" Visibility="Collapsed">
+                <DataGrid x:Name="RaspGrid" IsReadOnly="True" AutoGenerateColumns="True" CanUserAddRows="False" CanUserDeleteRows="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="100"/>
+
             </Grid>
         </Grid>
-    <!--#endregion-->
-    <!--#region Director-->
+        <!--#endregion-->
+        <!--#region Director-->
         <Grid x:Name="Director" Visibility="Hidden">
-            
+            <TextBlock Text="Главное меню" HorizontalAlignment="Center" Margin="0,20,0,0" FontSize="45"/>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button x:Name="DZamena" Content="Замены" Height="100" Width="400" Click="DZamena_Click" FontSize="35"/>
+                <Separator Opacity="0" Height="10"/>
+                <Button x:Name="DRaspisanie" Content="Расписание" Height="100" Width="400" Click="DRaspisanie_Click" FontSize="35" />
+                <Separator Opacity="0" Height="10"/>
+                <Button x:Name="DTeachers" Content="Расписание" Height="100" Width="400" Click="DTeachers_Click" FontSize="35" />
+            </StackPanel>
+            <Grid x:Name="DDataZamena" Background="White" Visibility="Collapsed">
+                <DataGrid x:Name="DZamenaGrid" AutoGenerateColumns="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="100"/>
+            </Grid>
+            <Grid x:Name="DDataRasp" Background="White" Visibility="Collapsed">
+                <DataGrid x:Name="DRaspGrid" AutoGenerateColumns="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="100"/>
+            </Grid>
+            <Grid x:Name="DDataTeachers" Background="White" Visibility="Collapsed">
+                <DataGrid x:Name="DTeachersGrid" AutoGenerateColumns="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="100"/>
+            </Grid>
         </Grid>
-    <!--#endregion-->
+        <!--#endregion-->
     </Grid>
 </Window>
