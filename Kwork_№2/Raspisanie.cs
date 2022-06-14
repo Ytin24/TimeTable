@@ -8,16 +8,11 @@ namespace Kwork__2
 {
     internal class Raspisanie
     {
-        public override string ToString()
-        {
-            return $"{ДеньНедели}" ;
-        }
-        public string ДеньНедели { get; set; }
+        public int ДеньНедели { get; set; }
         public RaspisanieDay Day { get; set; }
     }
     public class RaspisanieDay
     {
-        public string Урок { get; set; }
-        public string НазваниеПредмета { get; set; }
+        public string[] НазваниеПредмета { get; set; }
     }
 }

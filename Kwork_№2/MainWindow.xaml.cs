@@ -1,19 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Data.SqlClient;
-using System.Data;
 
 namespace Kwork__2
 {
@@ -26,7 +16,7 @@ namespace Kwork__2
         public MainWindow()
         {
             InitializeComponent();
-            
+
         }
         SqlConnection connection;
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -43,10 +33,10 @@ namespace Kwork__2
             connection = new SqlConnection(connectionString);
             try
             {
-                
+
                 connection.Open();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Невозможно подключиться к базе данных", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -81,10 +71,10 @@ namespace Kwork__2
                     {
                         while (dataRead.Read())
                         {
-                            
+
                             if (dpassword.Text == (string)dataRead.GetValue(0))
                             {
-                               
+
                                 MessageBox.Show("OK");
                             }
                             else
@@ -95,7 +85,7 @@ namespace Kwork__2
                     }
                 }
                 connection.Close();
-                
+
             }
             catch (Exception ex)
             {
@@ -110,7 +100,7 @@ namespace Kwork__2
             TDataZamena.Visibility = Visibility.Visible;
             connection.Open();
             string readString = "select * from Director";
-            
+
             SqlCommand readCommand = new SqlCommand(readString, connection);
             using (SqlDataReader dataRead = readCommand.ExecuteReader())
             {
@@ -137,31 +127,7 @@ namespace Kwork__2
         private void TRaspisanie_Click(object sender, RoutedEventArgs e)
         {
             TDataRaspisanie.Visibility = Visibility.Visible;
-            RaspisanieDay day = new RaspisanieDay()
-            {
-                НазваниеПредмета = "abc",
-                Урок = "1"
-            };
-            Raspisanie item = new Raspisanie()
-            {
-                ДеньНедели = "e222",
-                Day = day
-            };
-            Raspisanie item2 = new Raspisanie()
-            {
-                ДеньНедели = "e3333",
-                Day = day
-            };
-            Raspisanie item3 = new Raspisanie()
-            {
-                ДеньНедели = "e44444",
-                Day = day
-            };
-            List<Raspisanie> raspisanies = new List<Raspisanie>();
-            raspisanies.Add(item);
-            raspisanies.Add(item2);
-            raspisanies.Add(item3);
-            RaspGrid.ItemsSource = raspisanies;
+
         }
 
         private void TeacherLogin_Click(object sender, RoutedEventArgs e)
@@ -171,7 +137,7 @@ namespace Kwork__2
             {
                 connection.Open();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Невозможно подключиться к базе данных\nПроверьте данные подключения", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 pass = false;
@@ -181,7 +147,7 @@ namespace Kwork__2
                 Teacher.Visibility = Visibility.Visible;
                 connection.Close();
             }
-            
+
 
         }
 
@@ -202,6 +168,82 @@ namespace Kwork__2
 
         private void DZamena_Click(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        List<TextBlock> TextBlocks = new List<TextBlock>();
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            
+
+            foreach(var tb in TextBlocks)
+            {
+                AaA.GridUc.Children.Remove(tb);
+            }
+            for (int i = 1; i < AaA.GridUc.RowDefinitions.Count - 1; i++)
+            {
+                for (int j = 1; j < AaA.GridUc.ColumnDefinitions.Count; j++)
+                {
+                    TextBlock TextBlock = new TextBlock()
+                    {
+                        Text = $"ABC {i}:{j}",
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        Name = $"TextBlock{i}{j}"
+                    };
+
+                    Grid.SetRow(TextBlock, i);
+                    Grid.SetColumn(TextBlock, j);
+                    AaA.GridUc.Children.Add(TextBlock);
+                        TextBlocks.Add(TextBlock);
+                }
+            }
+            connection.Open();
+            string readString = "select * from Raspisanie r where r.ClassId = 1";
+            List<Raspisanie> raspisanies = new List<Raspisanie>();
+            SqlCommand readCommand = new SqlCommand(readString, connection);
+            using (SqlDataReader dataRead = readCommand.ExecuteReader())
+            {
+                if (dataRead != null)
+                {
+                    while (dataRead.Read())
+                    {
+                        RaspisanieDay day = new RaspisanieDay()
+                        {
+                            НазваниеПредмета = new string[5]
+                        };
+                        day.НазваниеПредмета[0] = dataRead?.GetValue(1).ToString();
+                        day.НазваниеПредмета[1] = dataRead?.GetValue(2).ToString();
+                        day.НазваниеПредмета[2] = dataRead?.GetValue(3).ToString();
+                        day.НазваниеПредмета[3] = dataRead?.GetValue(4).ToString();
+                        day.НазваниеПредмета[4] = dataRead?.GetValue(5).ToString();
+
+                        Raspisanie rasp = new Raspisanie()
+                        {
+                            ДеньНедели = (int)dataRead.GetValue(6),
+                            Day = day
+                        };
+                        raspisanies.Add(rasp);
+                    }
+                }
+            }
+            connection.Close();
+            foreach (TextBlock tb in TextBlocks)
+            {
+                for (int x = 0; x < 5; x++)
+                {
+                    int secondint = x + 1;
+                    for (int i = 0; i < raspisanies.Count; i++)
+                    {
+
+
+                        if (tb.Name == $"TextBlock{raspisanies[i].ДеньНедели}{secondint}")
+                        {
+                            tb.Text = raspisanies[i].Day.НазваниеПредмета[x];
+                        }
+                    }
+                }
+            }
 
         }
     }
