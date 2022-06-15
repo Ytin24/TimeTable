@@ -84,8 +84,7 @@
             </Grid>
             <Grid x:Name="TDataRaspisanie" Visibility="Collapsed">
                 <Button Click="Button_Click_2" Height="100" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left" />
-
-                <Uc:Table x:Name="AaA" SchoolClassName="1Б" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="200,0,0,0" />
+                <Uc:Table x:Name="AaA" SchoolClassName="1Б" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="200,0,0,0"  />
             </Grid>
         </Grid>
         <!--#endregion-->

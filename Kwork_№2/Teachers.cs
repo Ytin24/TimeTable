@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kwork__2
 {
+    
     internal class Teachers
     {
     }
