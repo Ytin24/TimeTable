@@ -139,21 +139,10 @@ namespace Kwork__2
             makeTable.table = AaA;
             makeTable.connection = connection;
             makeTable.Make();
-            makeTable.table.ClassName_SelectionChanged
-            //Thread updateItem = new Thread(x =>
-            //{
-            //    while (true)
-            //    {
-            //        this.Dispatcher.BeginInvoke(new Action(() =>
-            //        {
-            //            if (makeTable.table.ClassName.SelectedItem.ToString() != makeTable.ClassName)
-            //            { makeTable.Make(); }
-            //        }));
-            //        Thread.Sleep(1000);
-            //    }
-            //});
-            //updateItem.Start();
-
+            makeTable.table.ClassName.SelectionChanged += (o, e) =>
+            {
+                makeTable.Make();
+            };
         }
 
         private void TeacherLogin_Click(object sender, RoutedEventArgs e)

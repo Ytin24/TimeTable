@@ -41,10 +41,11 @@ namespace Kwork__2
                     Grid.SetColumn(TextBlock, j);
                     table.GridUc.Children.Add(TextBlock);
                     TextBlocks.Add(TextBlock);
-                    GetDataFromSql();
-                    AddDataToTextblock();
+
                 }
             }
+            GetDataFromSql();
+            AddDataToTextblock();
         }
         private void GetClasses()
         {
@@ -62,13 +63,13 @@ namespace Kwork__2
                     }
                 }
             }
-            table.ClassName.SelectedItem = Classes[0];
             connection.Close();
         }
         private void GetDataFromSql()
         {
-            ClassName = table.ClassName.SelectedItem.ToString();
-            if(ClassName == string.Empty) ClassName = "1Б";
+            if (table.ClassName.SelectedItem == null) ClassName = "1Б";
+            else ClassName = table.ClassName.SelectedItem.ToString();
+            schedules.Clear();
             connection.Open();
             string readString = $"select * from Schedules s join Class c On s.ClassId = c.ClassId where c.ClassName = N'{ClassName}'";
             SqlCommand readCommand = new SqlCommand(readString, connection);
@@ -76,25 +77,57 @@ namespace Kwork__2
             {
                 if (dataRead != null)
                 {
-                    while (dataRead.Read())
+                    if (dataRead.HasRows)
                     {
-                        scheduleSubject Subject = new()
+                        while (dataRead.Read())
                         {
-                            NameSubject = new string[5]
-                        };
-                        for (int i = 0; i < 5; i++)
-                        {
-                            int j = i + 1;
-                            Subject.NameSubject[i] = dataRead.GetValue(j).ToString();
+
+                            scheduleSubject Subject = new()
+                            {
+                                NameSubject = new string[5]
+                            };
+                            for (int i = 0; i < 5; i++)
+                            {
+                                int j = i + 1;
+                                Subject.NameSubject[i] = dataRead.GetValue(j).ToString();
+                                if (Subject.NameSubject[i] == string.Empty) Subject.NameSubject[i] = "Нет уроков";
+                            }
+                            schedule schedule = new()
+                            {
+                                DayOfWeek = (int)dataRead.GetValue(6),
+                                subject = Subject
+                            };
+                            
+                            schedules.Add(schedule);
+
                         }
-                        schedule schedule = new()
+                    }
+
+                    else
+                    {
+                        for (int x = 0; x < 5; x++)
                         {
-                            DayOfWeek = (int)dataRead.GetValue(6),
-                            subject = Subject
-                        };
-                        schedules.Add(schedule);
+                            int y = x + 1;
+
+                            scheduleSubject Subject = new()
+                            {
+                                NameSubject = new string[5]
+                            };
+                            for (int i = 0; i < 5; i++)
+                            {
+                                int j = i + 1;
+                                Subject.NameSubject[i] = "Уроков нет";
+                            }
+                            schedule schedule = new()
+                            {
+                                DayOfWeek = y,
+                                subject = Subject
+                            };
+                            schedules.Add(schedule);
+                        }
                     }
                 }
+
             }
             connection.Close();
         }

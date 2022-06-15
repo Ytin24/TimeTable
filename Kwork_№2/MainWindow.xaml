@@ -10,8 +10,8 @@
         Title="MainWindow" MinHeight="524" Height="524" MinWidth="1024" Width="1024">
     <Grid>
         <Grid>
-            <Label x:Name="ChangeLanguage" Content="EN/RU" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10"/>
-            <Label x:Name="DBConnection" Content="Настройки подключения" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" MouseLeftButtonDown="DBConnection_MouseLeftButtonDown"/>
+            <Label x:Name="ChangeLanguage" BorderBrush="Black" BorderThickness="1" Content="EN/RU" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10"/>
+            <Label x:Name="DBConnection" Content="Настройки подключения" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" MouseLeftButtonDown="DBConnection_MouseLeftButtonDown"/>
             <TextBlock Text="Авторизация" FontSize="45" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,100,0,0"/>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
                 <Button Style="{DynamicResource ButtonStyle1}" x:Name="TeacherLogin" Content="Учитель" Height="100" Width="300" Click="TeacherLogin_Click"/>
@@ -84,7 +84,7 @@
             </Grid>
             <Grid x:Name="TDataRaspisanie" Visibility="Collapsed">
                 <Button Click="Button_Click_2" Height="100" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left" />
-                <Uc:Table x:Name="AaA" SchoolClassName="1Б" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="200,0,0,0"  />
+                <Uc:Table x:Name="AaA" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="200,0,0,0"/>
             </Grid>
         </Grid>
         <!--#endregion-->

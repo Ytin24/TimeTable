@@ -25,11 +25,6 @@ namespace Kwork__2.UserControls
             InitializeComponent();
             this.DataContext = this;
         }
-        public string SchoolClassName { get; set; }
 
-        public void ClassName_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
     }
 }
