@@ -23,34 +23,27 @@ namespace Kwork__2
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string connectionString;
-            //dbConnect = new DbConnect()
-            //{
-            //    HostDb = Host.Text,
-            //    PortDb = Port.Text,
-            //    NameDb = Name.Text,
-            //    LoginDb = Login.Text,
-            //    PasswordDb = Password.Text
-            //};
-            //dbConnect = new DbConnect()
-            //{
-            //    HostDb = "127.0.0.0",
-            //    PortDb = "1433",
-            //    NameDb = "School",
-            //    LoginDb = "Ytin24",
-            //    PasswordDb = "333gfD333"
-            //};
-            //if(dbConnect.PortDb == "")
-            //{
+            dbConnect = new DbConnect()
+            {
+                HostDb = Host.Text,
+                PortDb = Port.Text,
+                NameDb = Name.Text,
+                LoginDb = Login.Text,
+                PasswordDb = Password.Text
+            };
 
-            //    connectionString = $"Connect Timeout=5;Data Source={dbConnect.HostDb};Initial Catalog={dbConnect.NameDb};User ID={dbConnect.LoginDb};Password={dbConnect.PasswordDb} ";
+            if (dbConnect.PortDb == "")
+            {
 
-            //}
-            //else
-            //{
-            // connectionString = $"Connect Timeout=5;Data Source={dbConnect.HostDb}, {dbConnect.PortDb};Initial Catalog={dbConnect.NameDb};User ID={dbConnect.LoginDb};Password={dbConnect.PasswordDb} ";
+                connectionString = $"Connect Timeout=5;Data Source={dbConnect.HostDb};Initial Catalog={dbConnect.NameDb};User ID={dbConnect.LoginDb};Password={dbConnect.PasswordDb} ";
 
-            //}
-            connectionString = "Data Source=YTIN24;User ID=Ytin24;Password=333gfD333;Initial Catalog=School";
+            }
+            else
+            {
+                connectionString = $"Connect Timeout=5;Data Source={dbConnect.HostDb}, {dbConnect.PortDb};Initial Catalog={dbConnect.NameDb};User ID={dbConnect.LoginDb};Password={dbConnect.PasswordDb} ";
+
+            }
+            
             connection = new SqlConnection(connectionString);
             try
             {
