@@ -7,6 +7,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/ButtonSimple.xaml" x:Name="ButtonS"/>
+                <ResourceDictionary Source="Style/ButtonSchedule.xaml" x:Name="ButtonS2"/>
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

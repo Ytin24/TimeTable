@@ -22,6 +22,7 @@ namespace Kwork__2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            string connectionString;
             //dbConnect = new DbConnect()
             //{
             //    HostDb = Host.Text,
@@ -30,15 +31,26 @@ namespace Kwork__2
             //    LoginDb = Login.Text,
             //    PasswordDb = Password.Text
             //};
-            dbConnect = new DbConnect()
-            {
-                HostDb = "192.168.1.102",
-                PortDb = "1433",
-                NameDb = "Test",
-                LoginDb = "Ytin24",
-                PasswordDb = "333gfD333"
-            };
-            var connectionString = $"Connect Timeout=5;Data Source={dbConnect.HostDb}, {dbConnect.PortDb};Initial Catalog={dbConnect.NameDb};User ID={dbConnect.LoginDb};Password={dbConnect.PasswordDb} ";
+            //dbConnect = new DbConnect()
+            //{
+            //    HostDb = "127.0.0.0",
+            //    PortDb = "1433",
+            //    NameDb = "School",
+            //    LoginDb = "Ytin24",
+            //    PasswordDb = "333gfD333"
+            //};
+            //if(dbConnect.PortDb == "")
+            //{
+
+            //    connectionString = $"Connect Timeout=5;Data Source={dbConnect.HostDb};Initial Catalog={dbConnect.NameDb};User ID={dbConnect.LoginDb};Password={dbConnect.PasswordDb} ";
+
+            //}
+            //else
+            //{
+            // connectionString = $"Connect Timeout=5;Data Source={dbConnect.HostDb}, {dbConnect.PortDb};Initial Catalog={dbConnect.NameDb};User ID={dbConnect.LoginDb};Password={dbConnect.PasswordDb} ";
+
+            //}
+            connectionString = "Data Source=YTIN24;User ID=Ytin24;Password=333gfD333;Initial Catalog=School";
             connection = new SqlConnection(connectionString);
             try
             {
@@ -70,7 +82,7 @@ namespace Kwork__2
             {
 
                 connection.Open();
-                string readString = "select * from Director";
+                string readString = "select * from Directors";
 
                 SqlCommand readCommand = new SqlCommand(readString, connection);
                 using (SqlDataReader dataRead = readCommand.ExecuteReader())
@@ -82,8 +94,7 @@ namespace Kwork__2
 
                             if (dpassword.Text == (string)dataRead.GetValue(0))
                             {
-
-                                MessageBox.Show("OK");
+                                Director.Visibility = Visibility.Visible;
                             }
                             else
                             {
@@ -105,38 +116,15 @@ namespace Kwork__2
         List<Replesment> zamenas = new List<Replesment>();
         private void TZamena_Click(object sender, RoutedEventArgs e)
         {
-            TDataZamena.Visibility = Visibility.Visible;
-            connection.Open();
-            string readString = "select * from Director";
-
-            SqlCommand readCommand = new SqlCommand(readString, connection);
-            using (SqlDataReader dataRead = readCommand.ExecuteReader())
-            {
-                if (dataRead != null)
-                {
-                    while (dataRead.Read())
-                    {
-                        Replesment item = new()
-                        {
-                            Add = "1",
-                            Remove = "2",
-                            Class = "33",
-                            Lesson = "5"
-                        };
-                        zamenas.Add(item);
-                    }
-                }
-            }
-            ZamenaGrid.ItemsSource = zamenas;
-            connection.Close();
+            
 
         }
 
         private void TRaspisanie_Click(object sender, RoutedEventArgs e)
         {
             TDataRaspisanie.Visibility = Visibility.Visible;
-            MakeTable makeTable = new MakeTable();
-            makeTable.table = AaA;
+            MakeTable makeTable = new MakeTable(IsDirector:false);
+            makeTable.table = TSchedule;
             makeTable.connection = connection;
             makeTable.Make();
             makeTable.table.ClassName.SelectionChanged += (o, e) =>
@@ -178,7 +166,15 @@ namespace Kwork__2
 
         private void DRaspisanie_Click(object sender, RoutedEventArgs e)
         {
-
+            DDataRasp.Visibility = Visibility.Visible;
+            MakeTable makeTable = new MakeTable(IsDirector: true);
+            makeTable.table = DSchedule;
+            makeTable.connection = connection;
+            makeTable.Make();
+            makeTable.table.ClassName.SelectionChanged += (o, e) =>
+            {
+                makeTable.Make();
+            };
         }
 
         private void DZamena_Click(object sender, RoutedEventArgs e)
@@ -190,5 +186,9 @@ namespace Kwork__2
 
         }
 
+        private void TTeachers_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

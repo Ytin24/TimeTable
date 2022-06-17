@@ -7,6 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid x:Name="GridUc" Background="White">
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="27*"/>
             <RowDefinition Height="27*"/>
@@ -24,6 +25,7 @@
             <ColumnDefinition Width="100*"/>
             <ColumnDefinition Width="100*"/>
         </Grid.ColumnDefinitions>
+        <Button x:Name="ButtonResource" Height="1" Width="1" Style="{DynamicResource ButtonStyle2}" Visibility="Hidden"/>
         <ComboBox x:Name="ClassName" Grid.Row="6" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center" />
         <TextBlock Grid.Column="0" Text="Расписание" VerticalAlignment="Center" TextAlignment="Center"/>
         <!--#region DayOFWeek-->

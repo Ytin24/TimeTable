@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Linq;
 
 namespace Kwork__2
 {
@@ -13,9 +15,18 @@ namespace Kwork__2
         public string ClassName;
         List<schedule> schedules = new List<schedule>();
         List<TextBlock> TextBlocks = new List<TextBlock>();
+        List<Button> Buttons = new List<Button>();
         List<string> Classes = new List<string>();
+        Dictionary<TextBlock, int> pairs;
+        Dictionary<string, int> ClassD = new();
+        bool IsDirector;
+        public MakeTable(bool IsDirector)
+        {
+            this.IsDirector = IsDirector;
+        }
         public void Make()
         {
+            pairs = new();
             GetClasses();
             if (table == null)
             {
@@ -25,41 +36,85 @@ namespace Kwork__2
             {
                 table.GridUc.Children.Remove(tb);
             }
+            TextBlocks.Clear();
             for (int i = 1; i < table.GridUc.RowDefinitions.Count - 1; i++)
             {
                 for (int j = 1; j < table.GridUc.ColumnDefinitions.Count; j++)
                 {
-                    TextBlock TextBlock = new TextBlock()
+                    TextBlock textBlock = new TextBlock()
                     {
                         Text = $"ABC {i}:{j}",
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
-                        Name = $"TextBlock{i}{j}"
+                        Name = $"TextBlock{i}{j}",
+                        
                     };
+                    pairs.Add(textBlock, i);
+                    Grid.SetRow(textBlock, i);
+                    Grid.SetColumn(textBlock, j);
+                    table.GridUc.Children.Add(textBlock);
+                    TextBlocks.Add(textBlock);
 
-                    Grid.SetRow(TextBlock, i);
-                    Grid.SetColumn(TextBlock, j);
-                    table.GridUc.Children.Add(TextBlock);
-                    TextBlocks.Add(TextBlock);
+                }
+            }
+            if (IsDirector)
+            {
+                for (int i = 1; i < table.GridUc.RowDefinitions.Count - 1; i++)
+                {
+                    for (int j = 1; j < table.GridUc.ColumnDefinitions.Count; j++)
+                    {
+                        Button button = new Button()
+                        {
+                            Background = Brushes.Transparent,
+                            Foreground = Brushes.Transparent,
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            VerticalAlignment = VerticalAlignment.Center,
+                            Height = table.GridUc.RowDefinitions[3].Height.Value,
+                            Width = table.GridUc.ColumnDefinitions[3].Width.Value,
+                            Name = $"k{i}{j}",
+                            Style = table.ButtonResource.Style
+                            
+                        };
+                        button.Click += (o, e) =>
+                        {
+                            var tb = TextBlocks.First(x => x.Name == $"TextBloc{button.Name}");
+                            
+                            string NewData = Microsoft.VisualBasic.Interaction.InputBox("Введите новое значение", "Изменение");
+                            tb.Text = NewData;
+                            UpdateDataToSQl(tb, NewData);
 
+                            
+
+                        };
+                        Grid.SetRow(button, i);
+                        Grid.SetColumn(button, j);
+                        table.GridUc.Children.Add(button);
+                        Buttons.Add(button);
+                    }
                 }
             }
             GetDataFromSql();
             AddDataToTextblock();
         }
+
         private void GetClasses()
         {
+            Classes.Clear();
+            ClassD.Clear();
             table.ClassName.ItemsSource = Classes;
             connection.Open();
-            string readString = $"select ClassName from Class";
+            string readString = $"select ClassName,ClassId from Class";
             SqlCommand readCommand = new SqlCommand(readString, connection);
             using (SqlDataReader dataRead = readCommand.ExecuteReader())
             {
                 if (dataRead != null)
                 {
+                    int i = 1;
                     while (dataRead.Read())
                     {
                         Classes.Add(dataRead.GetValue(0).ToString());
+                        ClassD.Add(dataRead.GetValue(0).ToString(), i);
+                        i++;
                     }
                 }
             }
@@ -67,7 +122,7 @@ namespace Kwork__2
         }
         private void GetDataFromSql()
         {
-            if (table.ClassName.SelectedItem == null) ClassName = "1Б";
+            if (table.ClassName.SelectedItem == null) ClassName = "1А";
             else ClassName = table.ClassName.SelectedItem.ToString();
             schedules.Clear();
             connection.Open();
@@ -148,6 +203,33 @@ namespace Kwork__2
                     }
                 }
             }
+        }
+        private void UpdateDataToSQl(TextBlock DT,string Data)
+        {
+            
+            var a = pairs[DT];
+            List < TextBlock > aaaaa = new();
+            foreach(var aaa in pairs)
+            {
+                if(aaa.Value == a)
+                {
+                    aaaaa.Add(aaa.Key);
+                }
+            }
+            connection.Open();
+            string readString =
+                "UPDATE Schedules\n" +
+                $"Set\n" +
+                $"First = N'{aaaaa[0].Text}',\n" +
+                $"Second = N'{aaaaa[1].Text}',\n" +
+                $"Third = N'{aaaaa[2].Text}',\n" +
+                $"Fourth = N'{aaaaa[3].Text}',\n" +
+                $"Fifth = N'{aaaaa[4].Text}'\n" +
+                $"where DayOfWeek = {a} and ClassId = {(ClassD[ClassName])}";
+                
+            SqlCommand readCommand = new SqlCommand(readString, connection);
+            SqlDataReader dataRead = readCommand.ExecuteReader();
+            connection.Close();
         }
     }
 }
