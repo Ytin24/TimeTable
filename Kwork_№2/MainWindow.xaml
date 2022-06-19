@@ -11,7 +11,7 @@
     <Grid>
         <Grid>
             <Label x:Name="ChangeLanguage" BorderBrush="Black" BorderThickness="1" Content="EN/RU" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10"/>
-            <Label x:Name="DBConnection" Content="Настройки подключения" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" MouseLeftButtonDown="DBConnection_MouseLeftButtonDown"/>
+            <Label x:Name="DBConnection" Content="Настройки подключения" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10" MouseLeftButtonDown="DbConnection_MouseLeftButtonDown"/>
             <TextBlock Text="Авторизация" FontSize="45" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,100,0,0"/>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
                 <Button Style="{DynamicResource ButtonStyle1}" x:Name="TeacherLogin" Content="Учитель" Height="100" Width="300" Click="TeacherLogin_Click"/>
@@ -70,40 +70,30 @@
             <!--#endregion-->
         </Grid>
         <!--#region Teacher-->
-        <Grid x:Name="Teacher" Background="White" Visibility="Collapsed">
+        <Grid x:Name="Teacher" Background="White" Visibility="Hidden">
+            <Button Content="⬅️" x:Name="BackT" Click="Back_Click" Padding="0,0,0,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Left"  Width="50" Margin="20"/>
             <TextBlock Text="Главное меню" HorizontalAlignment="Center" Margin="0,20,0,0" FontSize="45"/>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button x:Name="TZamena" Content="Замены" Height="100" Width="400" Click="TZamena_Click" FontSize="35"/>
+                <Button x:Name="TReplacements" Content="Замены" Height="100" Width="400" Click="TReplacements_Click" FontSize="35"/>
                 <Separator Opacity="0" Height="10"/>
-                <Button x:Name="TRaspisanie" Content="Расписание" Height="100" Width="400" Click="TRaspisanie_Click" FontSize="35" />
+                <Button x:Name="TSchedule" Content="Расписание" Height="100" Width="400" Click="TSchedule_Click" FontSize="35" />
                 <Separator Opacity="0" Height="10"/>
                 <Button x:Name="TTeachers" Content="Учителя" Height="100" Width="400" Click="TTeachers_Click" FontSize="35" />
             </StackPanel>
-            <Grid x:Name="TDataZamena" Background="White" Visibility="Collapsed">
-            </Grid>
-            <Grid x:Name="TDataRaspisanie" Visibility="Collapsed">
-                <Button Click="Button_Click_2" Height="100" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left" />
-                <Uc:Table x:Name="TSchedule" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="200,0,0,0"/>
-            </Grid>
         </Grid>
         <!--#endregion-->
         <!--#region Director-->
-        <Grid x:Name="Director" Visibility="Hidden" Background="White">
+        <Grid x:Name="Director" Visibility="Hidden" Background="White" d:IsHidden="True">
+            <Button Content="⬅️" x:Name="BackD" Click="Back_Click" Padding="0,0,0,3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Left"  Width="50" Margin="20"/>
             <TextBlock Text="Главное меню" HorizontalAlignment="Center" Margin="0,20,0,0" FontSize="45"/>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button x:Name="DZamena" Content="Замены" Height="100" Width="400" Click="DZamena_Click" FontSize="35"/>
+                <Button x:Name="DReplacements" Content="Замены" Height="100" Width="400" Click="DReplacements_Click" FontSize="35"/>
                 <Separator Opacity="0" Height="10"/>
-                <Button x:Name="DRaspisanie" Content="Расписание" Height="100" Width="400" Click="DRaspisanie_Click" FontSize="35" />
+                <Button x:Name="DSchedule" Content="Расписание" Height="100" Width="400" Click="DSchedule_Click" FontSize="35" />
                 <Separator Opacity="0" Height="10"/>
                 <Button x:Name="DTeachers" Content="Учителя" Height="100" Width="400" Click="DTeachers_Click" FontSize="35" />
             </StackPanel>
-            <Grid x:Name="DDataZamena" Background="White" Visibility="Collapsed">
-            </Grid>
-            <Grid x:Name="DDataRasp" Background="White" Visibility="Collapsed">
-                <Uc:Table x:Name="DSchedule" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="200,0,0,0"/>
-            </Grid>
-            <Grid x:Name="DDataTeachers" Background="White" Visibility="Collapsed">
-            </Grid>
+            <Frame x:Name="DFrame" NavigationUIVisibility="Hidden"/>
         </Grid>
         <!--#endregion-->
     </Grid>

@@ -26,7 +26,7 @@
             <ColumnDefinition Width="100*"/>
         </Grid.ColumnDefinitions>
         <Button x:Name="ButtonResource" Height="1" Width="1" Style="{DynamicResource ButtonStyle2}" Visibility="Hidden"/>
-        <ComboBox x:Name="ClassName" Grid.Row="6" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <ComboBox x:Name="ClassName" Grid.Row="6" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <TextBlock Grid.Column="0" Text="Расписание" VerticalAlignment="Center" TextAlignment="Center"/>
         <!--#region DayOFWeek-->
         <TextBlock Text="Понедельник" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>

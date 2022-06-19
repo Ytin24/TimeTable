@@ -8,6 +8,7 @@ namespace Kwork__2
 {
     public class Replesment
     {
+
         public string Remove { get; set; }
         public string Add { get; set; }
         public string Class { get; set; }

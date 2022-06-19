@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Kwork__2.Frames;
+using Kwork__2.Frames.Director;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 
@@ -12,39 +13,45 @@ namespace Kwork__2
     /// </summary>
     public partial class MainWindow : Window
     {
-        DbConnect dbConnect;
         SqlConnection connection;
+        #region Frames
+        TReplaceD replace = new();
+        TScheduleD schedule = new();
+        TTeachersD teachers = new();
+        DReplaceD replaceD = new();
+        DScheduleD scheduleD = new();
+        DTeachersD teachersD = new();
+#endregion
         public MainWindow()
         {
             InitializeComponent();
 
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        #region db
+        private void Button_Click(object sender, RoutedEventArgs e) //Подключение к БД
         {
             string connectionString;
-            dbConnect = new DbConnect()
-            {
-                HostDb = Host.Text,
-                PortDb = Port.Text,
-                NameDb = Name.Text,
-                LoginDb = Login.Text,
-                PasswordDb = Password.Text
-            };
+            DbConnect.HostDb = Host.Text;
+            DbConnect.PortDb = Port.Text;
+            DbConnect.NameDb = Name.Text;
+            DbConnect.LoginDb = Login.Text;
+            DbConnect.PasswordDb = Password.Text;
 
-            if (dbConnect.PortDb == "")
+            if (DbConnect.PortDb == "")
             {
 
-                connectionString = $"Connect Timeout=5;Data Source={dbConnect.HostDb};Initial Catalog={dbConnect.NameDb};User ID={dbConnect.LoginDb};Password={dbConnect.PasswordDb} ";
+                connectionString = $"Connect Timeout=5;Data Source={DbConnect.HostDb};Initial Catalog={DbConnect.NameDb};User ID={DbConnect.LoginDb};Password={DbConnect.PasswordDb} ";
 
             }
             else
             {
-                connectionString = $"Connect Timeout=5;Data Source={dbConnect.HostDb}, {dbConnect.PortDb};Initial Catalog={dbConnect.NameDb};User ID={dbConnect.LoginDb};Password={dbConnect.PasswordDb} ";
+                connectionString = $"Connect Timeout=5;Data Source={DbConnect.HostDb}, {DbConnect.PortDb};Initial Catalog={DbConnect.NameDb};User ID={DbConnect.LoginDb};Password={DbConnect.PasswordDb} ";
 
             }
-            
             connection = new SqlConnection(connectionString);
+            DbConnect.connection = connection;
+
+
             try
             {
                 connection.Open();
@@ -59,17 +66,17 @@ namespace Kwork__2
 
         }
 
-        private void DBConnection_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void DbConnection_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             PopUpDb.Visibility = Visibility.Visible;
         }
-
+        #endregion
         private void DirectorLogin_Click(object sender, RoutedEventArgs e)
         {
             PopUpD.Visibility = Visibility.Visible;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e) //Авторизация Директора
         {
             try
             {
@@ -106,75 +113,48 @@ namespace Kwork__2
             PopUpD.Visibility = Visibility.Collapsed;
 
         }
-        List<Replesment> zamenas = new List<Replesment>();
-        private void TZamena_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
-            
-
+            Teacher.Visibility = Visibility.Collapsed;
+            Director.Visibility = Visibility.Collapsed;
+            DFrame.Navigate(null);
+            scheduleD.Back();
+        }
+        private void DTeachers_Click(object sender, RoutedEventArgs e)
+        {
+            DFrame.Navigate(teachersD);
+        }
+        private void DReplacements_Click(object sender, RoutedEventArgs e)
+        {
+            DFrame.Navigate(replaceD);
         }
 
-        private void TRaspisanie_Click(object sender, RoutedEventArgs e)
+        private void DSchedule_Click(object sender, RoutedEventArgs e)
         {
-            TDataRaspisanie.Visibility = Visibility.Visible;
-            MakeTable makeTable = new MakeTable(IsDirector:false);
-            makeTable.table = TSchedule;
-            makeTable.connection = connection;
-            makeTable.Make();
-            makeTable.table.ClassName.SelectionChanged += (o, e) =>
-            {
-                makeTable.Make();
-            };
+            DFrame.Navigate(scheduleD);
         }
 
         private void TeacherLogin_Click(object sender, RoutedEventArgs e)
         {
-            bool pass = true;
             try
             {
                 connection.Open();
+                Teacher.Visibility = Visibility.Visible;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Невозможно подключиться к базе данных\nПроверьте данные подключения", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                pass = false;
+                MessageBox.Show("Невозможно подключиться к базе данных", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            if (pass)
-            {
-                Teacher.Visibility = Visibility.Visible;
-                connection.Close();
-            }
-
-
+            connection.Close();
+            
         }
 
-        private void TaddZ_Click(object sender, RoutedEventArgs e)
+        private void TReplacements_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void DTeachers_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void DRaspisanie_Click(object sender, RoutedEventArgs e)
-        {
-            DDataRasp.Visibility = Visibility.Visible;
-            MakeTable makeTable = new MakeTable(IsDirector: true);
-            makeTable.table = DSchedule;
-            makeTable.connection = connection;
-            makeTable.Make();
-            makeTable.table.ClassName.SelectionChanged += (o, e) =>
-            {
-                makeTable.Make();
-            };
-        }
-
-        private void DZamena_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void TSchedule_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -183,5 +163,7 @@ namespace Kwork__2
         {
 
         }
+
+
     }
 }
