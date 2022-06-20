@@ -61,7 +61,11 @@ namespace Kwork__2
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Невозможно подключиться к базе данных", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (lang == "ru-RU")
+                {
+                    MessageBox.Show("Невозможно подключиться к базе данных\nПроверьте данные подключения", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else { MessageBox.Show("Unable to connect to the database\nCheck the connection data", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
             }
             connection.Close();
             PopUpDb.Visibility = Visibility.Collapsed;
@@ -101,7 +105,11 @@ namespace Kwork__2
                             }
                             else
                             {
-                                MessageBox.Show("Неправильный пароль", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                if (lang == "ru-RU")
+                                {
+                                    MessageBox.Show("Неправильный пароль", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
+                                else { MessageBox.Show("Invalid password", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
                             }
                         }
                     }
@@ -111,7 +119,11 @@ namespace Kwork__2
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Невозможно подключиться к базе данных\nПроверьте данные подключения", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (lang == "ru-RU")
+                {
+                    MessageBox.Show("Невозможно подключиться к базе данных\nПроверьте данные подключения", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else { MessageBox.Show("Unable to connect to the database\nCheck the connection data", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
             }
             PopUpD.Visibility = Visibility.Collapsed;
 
@@ -150,7 +162,11 @@ namespace Kwork__2
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Невозможно подключиться к базе данных", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (lang == "ru-RU")
+                {
+                    MessageBox.Show("Невозможно подключиться к базе данных\nПроверьте данные подключения", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else { MessageBox.Show("Unable to connect to the database\nCheck the connection data", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
             }
             connection.Close();
             
