@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace Kwork__2.UserControls
 {
     /// <summary>
-    /// Логика взаимодействия для ReplacementsTable.xaml
+    /// Логика взаимодействия для TeachersTable.xaml
     /// </summary>
-    public partial class ReplacementsTable : UserControl
+    public partial class TeachersTable : UserControl
     {
-        public ReplacementsTable()
+        public TeachersTable()
         {
             InitializeComponent();
         }
-
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
-        {
-        }
-
     }
 }

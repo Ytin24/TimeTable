@@ -1,10 +1,12 @@
 ﻿using Kwork__2.Frames;
 using Kwork__2.Frames.Director;
 using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Input;
+using System.Linq;
 
 namespace Kwork__2
 {
@@ -13,6 +15,7 @@ namespace Kwork__2
     /// </summary>
     public partial class MainWindow : Window
     {
+        string lang = "ru-RU";
         SqlConnection connection;
         #region Frames
         TReplaceD replace = new();
@@ -118,7 +121,11 @@ namespace Kwork__2
             Teacher.Visibility = Visibility.Collapsed;
             Director.Visibility = Visibility.Collapsed;
             DFrame.Navigate(null);
+            TFrame.Navigate(null);
             scheduleD.Back();
+            schedule.Back();
+            replace.Back();
+            replaceD.Back();
         }
         private void DTeachers_Click(object sender, RoutedEventArgs e)
         {
@@ -151,19 +158,34 @@ namespace Kwork__2
 
         private void TReplacements_Click(object sender, RoutedEventArgs e)
         {
-
+            TFrame.Navigate(replace);
         }
 
         private void TSchedule_Click(object sender, RoutedEventArgs e)
         {
-
+            TFrame.Navigate(schedule);
         }
 
         private void TTeachers_Click(object sender, RoutedEventArgs e)
         {
-
+            TFrame.Navigate(teachers);
         }
 
+        private void ChangeLanguage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
 
+            ResourceDictionary dict = Application.Current.Resources.MergedDictionaries[2];
+            if (lang == "ru-RU")
+            {
+                dict.Source = new Uri("Lang/lang_en-US.xaml", UriKind.Relative);
+                lang = "en-EU";
+            }
+            else
+            {
+                dict.Source = new Uri("Lang/lang.xaml", UriKind.Relative);
+                lang = "ru-RU";
+            }
+
+        }
     }
 }

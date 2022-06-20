@@ -20,9 +20,29 @@ namespace Kwork__2.Frames
     /// </summary>
     public partial class TReplaceD : Page
     {
+        MakeReplaceTable ReplaceTable;
         public TReplaceD()
         {
             InitializeComponent();
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (ReplaceTable == null) ReplaceTable = new();
+            ReplaceTable.table = Table;
+            ReplaceTable.Make();
+            ReplaceTable.table.ClassName.SelectionChanged += (o, e) =>
+            {
+                ReplaceTable.Make();
+            };
+        }
+        public void Back()
+        {
+            try
+            {
+                ReplaceTable.ClearAll();
+            }
+            catch (Exception ex) { }
         }
     }
 }

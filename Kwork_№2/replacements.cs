@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kwork__2
 {
-    public class Replesment
+    public class Replacement
     {
 
         public string Remove { get; set; }

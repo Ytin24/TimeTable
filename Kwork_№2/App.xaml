@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Kwork__2"
              StartupUri="MainWindow.xaml">
-    <Application.Resources>
-        <ResourceDictionary>
+    <Application.Resources >
+        <ResourceDictionary x:Name="AppL">
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/ButtonSimple.xaml" x:Name="ButtonS"/>
                 <ResourceDictionary Source="Style/ButtonSchedule.xaml" x:Name="ButtonS2"/>
+                <ResourceDictionary Source="lang/lang.xaml" x:Name="Lang"/>
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Kwork__2.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White" x:Name="Grid" Loaded="Grid_Loaded">
+    <Grid Background="White" x:Name="GridUc" Loaded="Grid_Loaded">
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="50*"/>
@@ -23,9 +23,8 @@
             <ColumnDefinition Width="200*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.RowSpan="6" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button x:Name="Add" Click="Add_Click" Style="{DynamicResource ButtonStyle1}" Content="Добавить" Height="50" Width="120"/>
-            <Separator Opacity="0" Height="20"/>
-            <Button x:Name="Remove" Click="Remove_Click" Style="{DynamicResource ButtonStyle1}" Content="Убрать" Height="50" Width="120"/>
+            <ComboBox x:Name="ClassName" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
         </StackPanel>
         <TextBlock Text="Убрали" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"/>
         <TextBlock Text="Поставили" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"/>

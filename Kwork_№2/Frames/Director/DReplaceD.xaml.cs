@@ -20,37 +20,30 @@ namespace Kwork__2.Frames.Director
     /// </summary>
     public partial class DReplaceD : Page
     {
+        MakeReplaceTable ReplaceTable;
         public DReplaceD()
         {
             InitializeComponent();
             
         }
 
-        private void Remove_Click(object sender, RoutedEventArgs e)
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Add_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ReplacementsTable_Loaded(object sender, RoutedEventArgs e)
-        {
-            for (int i = 1; i <= Table.Grid.RowDefinitions.Count; i++)
+            if (ReplaceTable == null) ReplaceTable = new();
+            ReplaceTable.table = Table;
+            ReplaceTable.Make();
+            ReplaceTable.table.ClassName.SelectionChanged += (o, e) =>
             {
-                for (int j = 1; j <= Table.Grid.ColumnDefinitions.Count; j++)
-                {
-                    TextBox tb = new TextBox()
-                    {
-                        Text = "ABC",
-                    };
-                    Grid.SetRow(tb, i);
-                    Grid.SetColumn(tb, j);
-                    Table.Grid.Children.Add(tb);
-                }
+                ReplaceTable.Make();
+            };
+        }
+        public void Back()
+        {
+            try
+            {
+                ReplaceTable.ClearAll();
             }
+            catch (Exception ex) { }
         }
     }
 }

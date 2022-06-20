@@ -9,8 +9,7 @@ namespace Kwork__2
     
     internal class Teachers
     {
-        public int TeacherId { get; set; }
         public string TeacherName { get; set; }
-        public List<int> ClassesId { get; set; }
+        public string ClassesNames { get; set; }
     }
 }

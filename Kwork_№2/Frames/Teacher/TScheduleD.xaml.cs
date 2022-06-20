@@ -20,9 +20,29 @@ namespace Kwork__2.Frames
     /// </summary>
     public partial class TScheduleD : Page
     {
+        MakeTable makeTable;
         public TScheduleD()
         {
             InitializeComponent();
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (makeTable == null) makeTable = new MakeTable(IsDirector: false);
+            makeTable.table = TSchedule;
+            makeTable.Make();
+            makeTable.table.ClassName.SelectionChanged += (o, e) =>
+            {
+                makeTable.Make();
+            };
+        }
+        public void Back()
+        {
+            try
+            {
+                makeTable.ClearAll();
+            }
+            catch (Exception ex) { }
         }
     }
 }

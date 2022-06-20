@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DReplaceD">
-    <Grid>
-        <uc:ReplacementsTable x:Name="Table" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="200,0,0,0" Loaded="ReplacementsTable_Loaded"/>
+    <Grid Loaded="Grid_Loaded">
+        <uc:ReplacementsTable x:Name="Table" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="200,0,0,0"/>
     </Grid>
 </Page>

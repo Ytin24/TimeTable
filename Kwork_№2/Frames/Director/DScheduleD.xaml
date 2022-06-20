@@ -9,7 +9,7 @@
       Title="DScheduleD">
 
     <Grid>
-        <Uc:Table x:Name="DSchedule" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Loaded="DSchedule_Loaded"/>
+        <Uc:Table x:Name="DSchedule"  Loaded="DSchedule_Loaded" Margin="138,0,0,0"/>
 
     </Grid>
 </Page>

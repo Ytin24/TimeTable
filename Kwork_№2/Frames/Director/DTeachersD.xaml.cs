@@ -20,9 +20,22 @@ namespace Kwork__2.Frames.Director
     /// </summary>
     public partial class DTeachersD : Page
     {
+        MakeTeachersTable makeTable;
         public DTeachersD()
         {
             InitializeComponent();
         }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (makeTable == null) makeTable = new MakeTeachersTable();
+            makeTable.table = Table;
+            makeTable.Make();
+            makeTable.table.Teacher.SelectionChanged += (o, e) =>
+            {
+                makeTable.Make();
+            };
+        }
+    
     }
 }

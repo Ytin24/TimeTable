@@ -20,9 +20,21 @@ namespace Kwork__2.Frames
     /// </summary>
     public partial class TTeachersD : Page
     {
+        MakeTeachersTable makeTable;
         public TTeachersD()
         {
             InitializeComponent();
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (makeTable == null) makeTable = new MakeTeachersTable();
+            makeTable.table = Table;
+            makeTable.Make();
+            makeTable.table.Teacher.SelectionChanged += (o, e) =>
+            {
+                makeTable.Make();
+            };
         }
     }
 }
