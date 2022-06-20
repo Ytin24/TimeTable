@@ -58,6 +58,8 @@ namespace Kwork__2
             try
             {
                 connection.Open();
+
+                connection.Close();
             }
             catch (Exception ex)
             {
@@ -67,7 +69,6 @@ namespace Kwork__2
                 }
                 else { MessageBox.Show("Unable to connect to the database\nCheck the connection data", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
             }
-            connection.Close();
             PopUpDb.Visibility = Visibility.Collapsed;
 
 
@@ -159,6 +160,7 @@ namespace Kwork__2
             {
                 connection.Open();
                 Teacher.Visibility = Visibility.Visible;
+                connection.Close();
             }
             catch (Exception ex)
             {
@@ -168,7 +170,7 @@ namespace Kwork__2
                 }
                 else { MessageBox.Show("Unable to connect to the database\nCheck the connection data", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
             }
-            connection.Close();
+            
             
         }
 
